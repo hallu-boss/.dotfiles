@@ -62,6 +62,8 @@ vim.keymap.set('n', '<leader>h', '<cmd>Pick git_hunks<CR>')
 vim.keymap.set('n', '<leader>k', '<cmd>Pick keymaps<CR>')
 vim.keymap.set('n', '<leader>w', '<cmd>Pick grep pattern="<cword>"<CR>')
 vim.keymap.set('n', '<leader>m', '<cmd>Pick marks<CR>')
+vim.keymap.set('n', '<leader>.', '<cmd>Pick oldfiles<CR>')
+vim.keymap.set('n', '<leader>j', '<cmd>Pick list scope="jump"<CR>')
 
 vim.keymap.set('n', '<leader>t', ':terminal<CR>a')
 
