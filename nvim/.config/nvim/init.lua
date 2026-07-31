@@ -70,6 +70,10 @@ vim.keymap.set('n', '<leader>m', '<cmd>Pick marks<CR>')
 vim.keymap.set('n', '<leader>.', '<cmd>Pick oldfiles<CR>')
 vim.keymap.set('n', '<leader>j', '<cmd>Pick list scope="jump"<CR>')
 
+vim.keymap.set('n', '<leader>gb', '<cmd>Pick git_branches<CR>')
+vim.keymap.set('n', '<leader>gc', '<cmd>Pick git_commits<CR>')
+vim.keymap.set('n', '<leader>gs', '<cmd>lua MiniGit.show_at_cursor()<CR>')
+
 vim.keymap.set('n', '<leader>t', ':terminal<CR>a')
 
 vim.keymap.set('n', 'grr', '<cmd>Pick lsp scope="references"<CR>')
