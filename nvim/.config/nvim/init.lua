@@ -27,7 +27,6 @@ require('mini.diff').setup({
 })
 require('mini.hues').setup({ background = '#070912', foreground = '#c4c6cd' })
 
-
 require('neovide')
 
 vim.cmd.packadd('cfilter')
