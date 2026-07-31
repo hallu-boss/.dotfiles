@@ -1,5 +1,5 @@
 vim.pack.add {
-	'https://github.com/nvim-treesitter/nvim-treesitter',
+	-- 'https://github.com/nvim-treesitter/nvim-treesitter',
 	'https://github.com/neovim/nvim-lspconfig',
   'https://github.com/mason-org/mason.nvim',
   'https://github.com/nvim-mini/mini.nvim',
@@ -45,9 +45,6 @@ vim.opt.smartcase = true
 vim.opt.confirm = true
 vim.opt.termguicolors = true
 vim.opt.statusline = "%<%f %h%m%r%{%get(b:, 'minigit_summary_string', '')%}%=%-14.(%l,%c%V%) %P"
-vim.opt.foldlevel = 999
-vim.opt.foldmethod = 'expr'
-vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
@@ -69,31 +66,20 @@ vim.keymap.set('n', '<leader>m', '<cmd>Pick marks<CR>')
 
 vim.keymap.set('n', '<leader>t', ':terminal<CR>a')
 
--- local builtin = require 'telescope.builtin'
--- vim.keymap.set('n', '<leader>f', builtin.find_files)
--- vim.keymap.set('n', '<leader>b', builtin.buffers)
--- vim.keymap.set('n', '<leader>.', builtin.oldfiles)
--- vim.keymap.set('n', '<leader>t', ':terminal<CR>a')
--- vim.keymap.set('n', '<leader>/', builtin.live_grep)
--- vim.keymap.set('n', '<leader>?', builtin.help_tags)
--- vim.keymap.set('n', '<leader>k', builtin.keymaps)
--- vim.keymap.set('n', '<leader>j', builtin.jumplist)
--- vim.keymap.set('n', '<leader>s', builtin.lsp_document_symbols)
--- vim.keymap.set('n', '<leader>d', builtin.diagnostics)
--- vim.keymap.set('n', '<leader>\'', builtin.resume)
--- vim.keymap.set({ 'n', 'x' }, '<leader>w', builtin.grep_string)
-
--- vim.keymap.set('n', 'grr', builtin.lsp_references)
--- vim.keymap.set('n', 'gri', builtin.lsp_implementations)
--- vim.keymap.set('n', 'grd', builtin.lsp_definitions)
--- vim.keymap.set('n', 'gO', builtin.lsp_document_symbols)
--- vim.keymap.set('n', 'gW', builtin.lsp_dynamic_workspace_symbols)
--- vim.keymap.set('n', 'grt', builtin.lsp_type_definitions)
+vim.keymap.set('n', 'grr', '<cmd>Pick lsp scope="references"<CR>')
+vim.keymap.set('n', 'gri', '<cmd>Pick lsp scope="implementation"<CR>')
+vim.keymap.set('n', 'grd', '<cmd>Pick lsp scope="definition"<CR>')
+vim.keymap.set('n', 'gO', '<cmd>Pick lsp scope="document_symbol"<CR>')
+vim.keymap.set('n', 'gW', '<cmd>Pick lsp scope="workspace_symbol_live"<CR>')
+vim.keymap.set('n', 'grt', '<cmd>Pick lsp scope="type_definition"<CR>')
 
 vim.api.nvim_create_autocmd('FileType', {
     callback = function() pcall(vim.treesitter.start) end,
 })
 
-vim.api.nvim_create_autocmd("TextYankPost", {
-    callback = function() vim.highlight.on_yank() end,
-})
+-- vim.opt.foldlevel = 999
+-- vim.opt.foldmethod = 'expr'
+-- vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+-- vim.api.nvim_create_autocmd("TextYankPost", {
+--     callback = function() vim.highlight.on_yank() end,
+-- })
