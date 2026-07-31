@@ -11,14 +11,19 @@ vim.lsp.enable {
 }
 
 require('mini.icons').setup()
-require('mini.ai').setup()
+local extra = require('mini.extra')
+extra.setup()
+require('mini.ai').setup({
+  custom_textobjects = {
+    B = extra.gen_ai_spec.buffer(),
+  }
+})
 require('mini.surround').setup()
 require('mini.pick').setup()
 require('mini.files').setup()
 require('mini.git').setup()
 require('mini.cmdline').setup()
 require('mini.completion').setup()
-require('mini.extra').setup()
 require('mini.diff').setup({
   view = {
     style = 'sign',
@@ -74,13 +79,14 @@ vim.keymap.set('n', 'gO', '<cmd>Pick lsp scope="document_symbol"<CR>')
 vim.keymap.set('n', 'gW', '<cmd>Pick lsp scope="workspace_symbol_live"<CR>')
 vim.keymap.set('n', 'grt', '<cmd>Pick lsp scope="type_definition"<CR>')
 
-vim.api.nvim_create_autocmd('FileType', {
-    callback = function() pcall(vim.treesitter.start) end,
+vim.api.nvim_create_autocmd("TextYankPost", {
+    callback = function() vim.highlight.on_yank() end,
 })
+
 
 -- vim.opt.foldlevel = 999
 -- vim.opt.foldmethod = 'expr'
 -- vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
--- vim.api.nvim_create_autocmd("TextYankPost", {
---     callback = function() vim.highlight.on_yank() end,
+-- vim.api.nvim_create_autocmd('FileType', {
+--     callback = function() pcall(vim.treesitter.start) end,
 -- })
