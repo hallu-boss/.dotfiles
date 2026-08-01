@@ -1,5 +1,4 @@
 vim.pack.add {
-	-- 'https://github.com/nvim-treesitter/nvim-treesitter',
 	'https://github.com/neovim/nvim-lspconfig',
   'https://github.com/mason-org/mason.nvim',
   'https://github.com/nvim-mini/mini.nvim',
@@ -91,9 +90,3 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 })
 
 
--- vim.opt.foldlevel = 999
--- vim.opt.foldmethod = 'expr'
--- vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
--- vim.api.nvim_create_autocmd('FileType', {
---     callback = function() pcall(vim.treesitter.start) end,
--- })
