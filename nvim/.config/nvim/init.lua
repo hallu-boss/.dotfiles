@@ -12,7 +12,6 @@ vim.lsp.enable {
 require('mini.icons').setup()
 require('mini.surround').setup()
 require('mini.pick').setup()
-require('mini.files').setup()
 require('mini.git').setup()
 require('mini.cmdline').setup()
 require('mini.completion').setup()
@@ -33,6 +32,22 @@ require('mini.ai').setup({
     B = extra.gen_ai_spec.buffer(),
   }
 })
+
+local minifiles = require('mini.files')
+minifiles.setup()
+local set_mark = function(id, path, desc)
+  minifiles.set_bookmark(id, path, { desc = desc })
+end
+vim.api.nvim_create_autocmd('User', {
+  pattern = 'MiniFilesExplorerOpen',
+  callback = function()
+    set_mark('c', vim.fn.stdpath('config'), 'Config')
+    set_mark('w', vim.fn.getcwd, 'Working directory')
+    set_mark('~', '~', 'Home directory')
+    set_mark('d', '~/Downloads', 'Downloads directory')
+  end,
+})
+
 
 require('neovide')
 
