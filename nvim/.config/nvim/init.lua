@@ -11,6 +11,22 @@ vim.lsp.enable {
 }
 
 require('mini.icons').setup()
+require('mini.surround').setup()
+require('mini.pick').setup()
+require('mini.files').setup()
+require('mini.git').setup()
+require('mini.cmdline').setup()
+require('mini.completion').setup()
+
+require('mini.diff').setup({
+  view = {
+    style = 'sign',
+    signs = { add = '+', change = '~', delete = '-' },
+  },
+})
+
+require('mini.hues').setup({ background = '#070912', foreground = '#c4c6cd' })
+
 local extra = require('mini.extra')
 extra.setup()
 require('mini.ai').setup({
@@ -18,19 +34,6 @@ require('mini.ai').setup({
     B = extra.gen_ai_spec.buffer(),
   }
 })
-require('mini.surround').setup()
-require('mini.pick').setup()
-require('mini.files').setup()
-require('mini.git').setup()
-require('mini.cmdline').setup()
-require('mini.completion').setup()
-require('mini.diff').setup({
-  view = {
-    style = 'sign',
-    signs = { add = '+', change = '~', delete = '-' },
-  },
-})
-require('mini.hues').setup({ background = '#070912', foreground = '#c4c6cd' })
 
 require('neovide')
 
