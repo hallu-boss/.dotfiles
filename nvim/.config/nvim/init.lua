@@ -4,6 +4,8 @@ vim.pack.add {
   'https://github.com/nvim-mini/mini.nvim',
 }
 
+require('neovide')
+
 require('mason').setup()
 vim.lsp.enable {
   'lua_ls', 'vtsls',
@@ -64,9 +66,6 @@ vim.api.nvim_create_autocmd('User', {
     set_mark('d', '~/Downloads', 'Downloads directory')
   end,
 })
-
-
-require('neovide')
 
 vim.cmd.packadd('cfilter')
 vim.cmd.packadd('nvim.undotree')
