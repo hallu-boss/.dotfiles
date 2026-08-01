@@ -47,6 +47,10 @@
     "vim-fugitive": {
       "rev": "3b753cf8c6a4dcde6edee8827d464ba9b8c4a6f0",
       "src": "https://github.com/tpope/vim-fugitive"
+    },
+    "y9nika.nvim": {
+      "rev": "18827266802e8e105c724c72a84c2c59beb5d90f",
+      "src": "https://github.com/y9san9/y9nika.nvim"
     }
   }
 }

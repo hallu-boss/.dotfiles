@@ -1,11 +1,33 @@
 vim.pack.add {
 	'https://github.com/neovim/nvim-lspconfig',
   'https://github.com/mason-org/mason.nvim',
-  'https://github.com/nvim-mini/mini.nvim',
+  'https://github.com/nvim-treesitter/nvim-treesitter',
+  'https://github.com/stevearc/oil.nvim',
+  'https://github.com/tpope/vim-fugitive',
 }
 
-require('neovide')
+vim.cmd.colorscheme('habamax')
+vim.cmd.colorscheme('default')
 
+vim.cmd.packadd('cfilter')
+vim.cmd.packadd('nvim.undotree')
+vim.cmd.packadd('nvim.difftool')
+
+require('vim._core.ui2').enable()
+
+-- NEOVIDE
+if vim.g.neovide then
+  vim.o.guifont = "CommitMono Nerd Font:h14"
+
+	vim.keymap.set('n', '<C-s-v>', '"+p')
+	vim.keymap.set('i', '<C-s-v>', '<C-r>+')
+	vim.keymap.set('t', '<C-s-v>', '<C-\\><C-o>"+p')
+end
+
+
+require('oil').setup()
+
+-- LSP
 require('mason').setup()
 vim.lsp.enable {
   'lua_ls', 'vtsls',
@@ -28,51 +50,7 @@ local config = {
 
 vim.lsp.config('lua_ls', config)
 
-require('mini.icons').setup()
-require('mini.surround').setup()
-require('mini.pick').setup()
-require('mini.git').setup()
-require('mini.cmdline').setup()
-require('mini.completion').setup()
-
-require('mini.diff').setup({
-  view = {
-    style = 'sign',
-    signs = { add = '+', change = '~', delete = '-' },
-  },
-})
-
-require('mini.hues').setup({ background = '#070912', foreground = '#c4c6cd' })
-
-local extra = require('mini.extra')
-extra.setup()
-require('mini.ai').setup({
-  custom_textobjects = {
-    B = extra.gen_ai_spec.buffer(),
-  }
-})
-
-local minifiles = require('mini.files')
-minifiles.setup()
-local set_mark = function(id, path, desc)
-  minifiles.set_bookmark(id, path, { desc = desc })
-end
-vim.api.nvim_create_autocmd('User', {
-  pattern = 'MiniFilesExplorerOpen',
-  callback = function()
-    set_mark('c', vim.fn.stdpath('config'), 'Config')
-    set_mark('w', vim.fn.getcwd, 'Working directory')
-    set_mark('~', '~', 'Home directory')
-    set_mark('d', '~/Downloads', 'Downloads directory')
-  end,
-})
-
-vim.cmd.packadd('cfilter')
-vim.cmd.packadd('nvim.undotree')
-vim.cmd.packadd('nvim.difftool')
-
-require('vim._core.ui2').enable()
-
+-- OPTIONS
 vim.g.mapleader = ' '
 vim.opt.number = true
 vim.opt.relativenumber = true
@@ -81,46 +59,54 @@ vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.confirm = true
 vim.opt.termguicolors = true
-vim.opt.statusline = "%<%f %h%m%r%{%get(b:, 'minigit_summary_string', '')%}%=%-14.(%l,%c%V%) %P"
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
+vim.opt.completeopt = 'menu,menuone,fuzzy,noinsert'
+vim.opt.statusline = "%<%f %h%m%r%{FugitiveStatusline()}%=%-14.(%l,%c%V%) %P"
 
+function rg_find_files(cmdarg, _)
+  local fnames = vim.fn.systemlist("rg --files --hidden --color=never ")
+  if #cmdarg == 0 then
+    return fnames
+  else
+    return vim.fn.matchfuzzy(fnames, cmdarg)
+  end
+end
+
+vim.o.findfunc = "v:lua.rg_find_files"
+
+-- KEYMAPS
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 vim.keymap.set({ 'n', 'x' }, '<leader>y', '"+y')
-
-vim.keymap.set('n', '<leader>e', '<cmd>lua MiniFiles.open()<CR>')
-
-vim.keymap.set('n', '<leader>f', '<cmd>Pick files<CR>')
-vim.keymap.set('n', '<leader>b', '<cmd>Pick buffers<CR>')
-vim.keymap.set('n', '<leader>\'', '<cmd>Pick resume<CR>')
-vim.keymap.set('n', '<leader>/', '<cmd>Pick grep_live<CR>')
-vim.keymap.set('n', '<leader>?', '<cmd>Pick help<CR>')
-vim.keymap.set('n', '<leader>h', '<cmd>Pick git_hunks<CR>')
-vim.keymap.set('n', '<leader>k', '<cmd>Pick keymaps<CR>')
-vim.keymap.set('n', '<leader>w', '<cmd>Pick grep pattern="<cword>"<CR>')
-vim.keymap.set('n', '<leader>m', '<cmd>Pick marks<CR>')
-vim.keymap.set('n', '<leader>.', '<cmd>Pick oldfiles<CR>')
-vim.keymap.set('n', '<leader>j', '<cmd>Pick list scope="jump"<CR>')
-
-vim.keymap.set('n', '<leader>gb', '<cmd>Pick git_branches<CR>')
-vim.keymap.set('n', '<leader>gc', '<cmd>Git commit -v<CR>')
-vim.keymap.set('n', '<leader>gC', '<cmd>Pick git_commits<CR>')
-vim.keymap.set('n', '<leader>gs', '<cmd>lua MiniGit.show_at_cursor()<CR>')
-vim.keymap.set('n', '<leader>gd', '<cmd>Git diff --cached<CR>')
-vim.keymap.set('n', '<leader>gD', '<cmd>Git diff<CR>')
-
 vim.keymap.set('n', '<leader>t', ':terminal<CR>a')
 
-vim.keymap.set('n', 'grr', '<cmd>Pick lsp scope="references"<CR>')
-vim.keymap.set('n', 'gri', '<cmd>Pick lsp scope="implementation"<CR>')
-vim.keymap.set('n', 'grd', '<cmd>Pick lsp scope="definition"<CR>')
-vim.keymap.set('n', 'gO', '<cmd>Pick lsp scope="document_symbol"<CR>')
-vim.keymap.set('n', 'gW', '<cmd>Pick lsp scope="workspace_symbol_live"<CR>')
-vim.keymap.set('n', 'grt', '<cmd>Pick lsp scope="type_definition"<CR>')
+vim.keymap.set('n', '-', '<cmd>Oil<CR>')
 
+vim.keymap.set('n', '<leader>.', '<cmd>browse oldfiles<CR>')
+vim.keymap.set('n', '<leader>f', ':find ')
+vim.keymap.set('n', '<leader>b', ':buffer ')
+vim.keymap.set('n', '<leader>/', ':grep ')
+vim.keymap.set('n', '<leader>w', ':grep <C-r><C-w><CR>')
+vim.keymap.set('n', '<leader>g', '<cmd>tab G<CR>')
+
+-- AUTOCOMMANDS
 vim.api.nvim_create_autocmd("TextYankPost", {
     callback = function() vim.highlight.on_yank() end,
 })
 
+vim.api.nvim_create_autocmd('FileType', {
+    callback = function() pcall(vim.treesitter.start) end,
+})
 
+vim.api.nvim_create_autocmd('LspAttach', {
+    callback = function(args)
+        vim.o.signcolumn = 'yes:1'
+        local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
+        if client:supports_method('textDocument/completion') then
+            vim.o.complete = 'o,.,w,b,u'
+            vim.o.completeopt = 'menu,menuone,popup,noinsert'
+            vim.lsp.completion.enable(true, client.id, args.buf)
+        end
+    end
+})
