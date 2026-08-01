@@ -9,6 +9,23 @@ vim.lsp.enable {
   'lua_ls', 'vtsls',
 }
 
+local config = {
+  settings = {
+    Lua = {
+      runtime = {
+        version = 'LuaJIT',
+      },
+      workspace = {
+        library = {
+          vim.env.VIMRUNTIME,
+        }
+      },
+    },
+  },
+}
+
+vim.lsp.config('lua_ls', config)
+
 require('mini.icons').setup()
 require('mini.surround').setup()
 require('mini.pick').setup()
