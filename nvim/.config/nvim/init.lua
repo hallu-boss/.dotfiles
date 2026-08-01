@@ -104,8 +104,11 @@ vim.keymap.set('n', '<leader>.', '<cmd>Pick oldfiles<CR>')
 vim.keymap.set('n', '<leader>j', '<cmd>Pick list scope="jump"<CR>')
 
 vim.keymap.set('n', '<leader>gb', '<cmd>Pick git_branches<CR>')
-vim.keymap.set('n', '<leader>gc', '<cmd>Pick git_commits<CR>')
+vim.keymap.set('n', '<leader>gc', '<cmd>Git commit -v<CR>')
+vim.keymap.set('n', '<leader>gC', '<cmd>Pick git_commits<CR>')
 vim.keymap.set('n', '<leader>gs', '<cmd>lua MiniGit.show_at_cursor()<CR>')
+vim.keymap.set('n', '<leader>gd', '<cmd>Git diff --cached<CR>')
+vim.keymap.set('n', '<leader>gD', '<cmd>Git diff<CR>')
 
 vim.keymap.set('n', '<leader>t', ':terminal<CR>a')
 
