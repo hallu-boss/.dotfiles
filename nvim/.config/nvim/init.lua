@@ -4,6 +4,7 @@ vim.pack.add {
   'https://github.com/nvim-treesitter/nvim-treesitter',
   'https://github.com/stevearc/oil.nvim',
   'https://github.com/tpope/vim-fugitive',
+  'https://github.com/nvim-tree/nvim-web-devicons',
 }
 
 vim.cmd.colorscheme('habamax')
@@ -15,6 +16,8 @@ vim.cmd.packadd('nvim.difftool')
 
 require('vim._core.ui2').enable()
 
+require('oil').setup()
+
 -- NEOVIDE
 if vim.g.neovide then
   vim.o.guifont = "CommitMono Nerd Font:h14"
@@ -23,9 +26,6 @@ if vim.g.neovide then
 	vim.keymap.set('i', '<C-s-v>', '<C-r>+')
 	vim.keymap.set('t', '<C-s-v>', '<C-\\><C-o>"+p')
 end
-
-
-require('oil').setup()
 
 -- LSP
 require('mason').setup()
@@ -65,7 +65,7 @@ vim.opt.expandtab = true
 vim.opt.completeopt = 'menu,menuone,fuzzy,noinsert'
 vim.opt.statusline = "%<%f %h%m%r%{FugitiveStatusline()}%=%-14.(%l,%c%V%) %P"
 
-function rg_find_files(cmdarg, _)
+function Rg_find_files(cmdarg, _)
   local fnames = vim.fn.systemlist("rg --files --hidden --color=never ")
   if #cmdarg == 0 then
     return fnames
@@ -74,7 +74,7 @@ function rg_find_files(cmdarg, _)
   end
 end
 
-vim.o.findfunc = "v:lua.rg_find_files"
+vim.o.findfunc = "v:lua.Rg_find_files"
 
 -- KEYMAPS
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
