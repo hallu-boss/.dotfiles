@@ -134,15 +134,15 @@ vim.api.nvim_create_autocmd('User', {
 })
 
 local set_mark = function(id, path, desc)
-    MiniFiles.set_bookmark(id, path, { desc = desc })
-  end
-  vim.api.nvim_create_autocmd('User', {
-    pattern = 'MiniFilesExplorerOpen',
-    callback = function()
-      set_mark('c', vim.fn.stdpath('config'), 'Config')
-      set_mark('w', vim.fn.getcwd, 'Working directory')
-      set_mark('~', '~', 'Home directory')
-      set_mark('d', '~/Downloads', 'Downloads directory')
-    end,
-  })
+  MiniFiles.set_bookmark(id, path, { desc = desc })
+end
+vim.api.nvim_create_autocmd('User', {
+  pattern = 'MiniFilesExplorerOpen',
+  callback = function()
+    set_mark('c', vim.fn.stdpath('config'), 'Config')
+    set_mark('w', vim.fn.getcwd, 'Working directory')
+    set_mark('~', '~', 'Home directory')
+    set_mark('d', '~/Downloads', 'Downloads directory')
+  end,
+})
 
