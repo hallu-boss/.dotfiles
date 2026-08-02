@@ -92,6 +92,8 @@ vim.keymap.set('n', 'gri', '<cmd>Pick lsp scope="implementation"<CR>')
 vim.keymap.set('n', 'gO', '<cmd>Pick lsp scope="document_symbol"<CR>')
 vim.keymap.set('n', 'grt', '<cmd>Pick lsp scope="type_definition"<CR>')
 
+vim.keymap.set('n', 'q:', '<cmd>Pick history scope=":"<CR>')
+vim.keymap.set('n', 'q/', '<cmd>Pick history scope="/"<CR>')
 
 -- AUTOCOMMANDS
 vim.api.nvim_create_autocmd("TextYankPost", {
