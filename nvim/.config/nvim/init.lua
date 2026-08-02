@@ -4,6 +4,7 @@ vim.pack.add {
     'https://github.com/neovim/nvim-lspconfig',
     'https://github.com/mason-org/mason.nvim',
     'https://github.com/tpope/vim-fugitive',
+    'https://github.com/stevearc/oil.nvim',
 }
 
 vim.cmd.packadd('cfilter')
@@ -11,6 +12,8 @@ vim.cmd.packadd('nvim.undotree')
 vim.cmd.packadd('nvim.difftool')
 
 require('vim._core.ui2').enable()
+
+require('oil').setup()
 
 require('mason').setup()
 vim.lsp.enable { 'lua_ls', 'vtsls' }
@@ -44,7 +47,7 @@ vim.o.statusline = "%<%f %h%w%m%r%{FugitiveStatusline()} %{% v:lua.require('vim.
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 vim.keymap.set({ 'n', 'x' }, '<leader>y', '"+y')
 
-vim.keymap.set('n', '<leader>e', '<cmd>Explore<CR>')
+vim.keymap.set('n', '-', '<cmd>Oil<CR>')
 
 vim.keymap.set('n', '<leader>.', '<cmd>browse oldfiles<CR>')
 
