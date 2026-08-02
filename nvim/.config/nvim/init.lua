@@ -16,6 +16,7 @@ vim.cmd.packadd('nvim.difftool')
 require('vim._core.ui2').enable()
 
 require('mini.icons').setup()
+require('mini.extra').setup()
 require('mini.pick').setup()
 require('mini.completion').setup()
 require('mini.diff').setup()
@@ -82,7 +83,15 @@ vim.keymap.set('n', '<leader>/', '<cmd>Pick grep_live<CR>')
 vim.keymap.set('n', '<leader>w', '<cmd>Pick grep pattern="<cword>"<CR>')
 vim.keymap.set('n', '<leader>\'', '<cmd>Pick resume<CR>')
 vim.keymap.set('n', '<leader>?', '<cmd>Pick help<CR>')
+vim.keymap.set('n', '<leader>k', '<cmd>Pick keymaps<CR>')
+vim.keymap.set('n', '<leader>d', '<cmd>Pick diagnostic<CR>')
 vim.keymap.set('n', '<leader>g', '<cmd>tab G<CR>')
+
+vim.keymap.set('n', 'grr', '<cmd>Pick lsp scope="references"<CR>')
+vim.keymap.set('n', 'gri', '<cmd>Pick lsp scope="implementation"<CR>')
+vim.keymap.set('n', 'gO', '<cmd>Pick lsp scope="document_symbol"<CR>')
+vim.keymap.set('n', 'grt', '<cmd>Pick lsp scope="type_definition"<CR>')
+
 
 -- AUTOCOMMANDS
 vim.api.nvim_create_autocmd("TextYankPost", {
