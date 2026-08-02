@@ -47,6 +47,7 @@ function Find_files(text, _)
   local files = vim.fn.glob('**/*', true, true)
   return vim.fn.matchfuzzy(files, text)
 end
+
 vim.opt.findfunc = 'v:lua.Find_files'
 
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
@@ -60,6 +61,7 @@ vim.keymap.set('n', '<leader>f', ':find ')
 vim.keymap.set('n', '<leader>b', ':buffer ')
 vim.keymap.set('n', '<leader>/', ':copen | :silent grep! ')
 vim.keymap.set('n', '<leader>w', ':copen | :silent grep! <C-r><C-w><CR>')
+vim.keymap.set('x', '<leader>w', '"wy:copen | :silent grep! "<C-r>w"<CR>')
 vim.keymap.set('n', '<leader>g', '<cmd>tab Git<CR>')
 
 vim.keymap.set('n', '<leader>t', ':terminal<CR>a')
