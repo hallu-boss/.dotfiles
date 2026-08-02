@@ -15,6 +15,15 @@ require('vim._core.ui2').enable()
 require('mason').setup()
 vim.lsp.enable { 'lua_ls', 'vtsls' }
 
+vim.lsp.config('lua_ls', {
+  settings = {
+    Lua = {
+      runtime = { version = 'LuaJIT', },
+      workspace = { library = { vim.env.VIMRUNTIME, } },
+    },
+  },
+})
+
 vim.cmd.colorscheme('habamax')
 vim.cmd.colorscheme('default')
 
