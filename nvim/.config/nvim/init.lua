@@ -128,10 +128,16 @@ vim.keymap.set('n', '<leader>.', '<cmd>browse oldfiles<CR>')
 vim.keymap.set('n', '<leader>f', ':find ')
 vim.keymap.set('n', '<leader>b', ':buffer ')
 vim.keymap.set('n', '<leader>/', ':copen | :silent grep! ')
+vim.keymap.set('n', '<leader>g', ':terminal lazygit<CR>a')
 vim.keymap.set('n', '<leader>w', ':copen | :silent grep! <C-r><C-w><CR>')
 vim.keymap.set('x', '<leader>w', '"wy:copen | :silent grep! "<C-r>w"<CR>')
 
 vim.keymap.set('n', '<leader>t', ':terminal<CR>a')
+
+vim.api.nvim_create_autocmd("TermClose", {
+  pattern = 'term://*lazygit',
+  callback = function() vim.api.nvim_input('<CR>') end
+})
 
 vim.api.nvim_create_autocmd("TextYankPost", {
     callback = function() vim.highlight.on_yank() end,
