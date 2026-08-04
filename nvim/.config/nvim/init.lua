@@ -4,7 +4,6 @@ vim.pack.add {
     'https://github.com/neovim/nvim-lspconfig',
     'https://github.com/mason-org/mason.nvim',
     'https://github.com/tpope/vim-fugitive',
-    'https://github.com/stevearc/oil.nvim',
 }
 
 vim.cmd.packadd('cfilter')
@@ -12,8 +11,6 @@ vim.cmd.packadd('nvim.undotree')
 vim.cmd.packadd('nvim.difftool')
 
 require('vim._core.ui2').enable()
-
-require('oil').setup()
 
 require('mason').setup()
 vim.lsp.enable { 'lua_ls', 'vtsls' }
@@ -53,7 +50,8 @@ vim.opt.findfunc = 'v:lua.Find_files'
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 vim.keymap.set({ 'n', 'x' }, '<leader>y', '"+y')
 
-vim.keymap.set('n', '-', '<cmd>Oil<CR>')
+
+vim.keymap.set('n', '<leader>e', '<cmd>Ex<CR>')
 
 vim.keymap.set('n', '<leader>.', '<cmd>browse oldfiles<CR>')
 
@@ -62,7 +60,7 @@ vim.keymap.set('n', '<leader>b', ':buffer ')
 vim.keymap.set('n', '<leader>/', ':copen | :silent grep! ')
 vim.keymap.set('n', '<leader>w', ':copen | :silent grep! <C-r><C-w><CR>')
 vim.keymap.set('x', '<leader>w', '"wy:copen | :silent grep! "<C-r>w"<CR>')
-vim.keymap.set('n', '<leader>g', '<cmd>tab Git<CR>')
+vim.keymap.set('n', '<leader>g', '<cmd>Git<CR>')
 
 vim.keymap.set('n', '<leader>t', ':terminal<CR>a')
 
