@@ -11,6 +11,7 @@ vim.o.ignorecase = true
 vim.o.smartcase = true
 vim.o.confirm = true
 vim.o.wildmode = 'noselect'
+vim.opt.wildoptions:append { 'fuzzy' }
 
 vim.pack.add {
   'https://github.com/vague-theme/vague.nvim',
@@ -32,6 +33,10 @@ vim.keymap.set('n', '<leader>j', '<cmd>FzfLua jumps<CR>')
 vim.keymap.set('n', '<leader>\'', '<cmd>FzfLua resume<CR>')
 vim.keymap.set('n', '<leader>?', '<cmd>FzfLua helptags<CR>')
 vim.keymap.set('n', '<leader>k', '<cmd>FzfLua keymaps<CR>')
+vim.keymap.set('n', '<leader>w', '<cmd>FzfLua grep_cword<CR>')
+vim.keymap.set('x', '<leader>w', '<cmd>FzfLua grep_visual<CR>')
+vim.keymap.set('n', '<leader>h', '<cmd>FzfLua git_hunks<CR>')
+vim.keymap.set('n', '<leader>d', '<cmd>FzfLua diagnostics_document<CR>')
 
 vim.keymap.set('n', '<leader>v', '<cmd>edit $MYVIMRC<CR>')
 
