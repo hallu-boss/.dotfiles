@@ -79,14 +79,15 @@ vim.api.nvim_create_autocmd('FileType', {
 
 vim.api.nvim_create_autocmd('CmdlineChanged', {
   pattern = ':',
-  callback = function()
-    vim.fn.wildtrigger()
-  end,
+  callback = function() vim.fn.wildtrigger() end,
 })
 
 vim.api.nvim_create_autocmd('TermClose', {
   pattern = 'term://*lazygit',
-  callback = function()
-    vim.api.nvim_input('<CR>')
-  end,
+  callback = function() vim.api.nvim_input('<CR>') end,
 })
+
+vim.api.nvim_create_autocmd("TextYankPost", {
+    callback = function() vim.highlight.on_yank() end,
+})
+
