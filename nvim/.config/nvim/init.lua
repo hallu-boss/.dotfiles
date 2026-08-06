@@ -52,7 +52,9 @@ vim.keymap.set('n', '<leader>e', '<cmd>Ex<CR>')
 
 vim.keymap.set('n', '<leader>f', ':find ')
 vim.keymap.set('n', '<leader>b', ':buffer ')
-vim.keymap.set('n', '<leader>/', ':grep ')
+vim.keymap.set('n', '<leader>/', ':copen | silent grep! ')
+vim.keymap.set('n', '<leader>w', ':copen | silent grep! <C-r><C-w><CR>')
+vim.keymap.set('x', '<leader>w', 'y:copen | silent grep! escape("<C-r>"", " \\")<CR>')
 vim.keymap.set('n', '<leader>.', ':browse oldfiles<CR>')
 
 vim.keymap.set('n', '<leader>v', '<cmd>edit $MYVIMRC<CR>')
@@ -60,6 +62,10 @@ vim.keymap.set('n', '<leader>v', '<cmd>edit $MYVIMRC<CR>')
 vim.keymap.set('n', '<leader>g', '<cmd>terminal lazygit<CR>a')
 
 vim.keymap.set('n', '<leader>t', '<cmd>terminal<CR>a')
+
+vim.keymap.set('n', '<leader>h', function() require("gitsigns").setqflist("all") end)
+
+vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
 
 vim.api.nvim_create_autocmd('FileType', {
   callback = function() pcall(vim.treesitter.start) end,
