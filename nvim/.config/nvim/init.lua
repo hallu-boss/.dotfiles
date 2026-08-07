@@ -28,7 +28,7 @@ vim.pack.add {
 
 require('mason').setup()
 vim.lsp.enable {
-  'lua_ls'
+  'lua_ls', 'vtsls',
 }
 
 local config = {
