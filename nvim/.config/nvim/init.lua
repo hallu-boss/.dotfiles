@@ -24,7 +24,10 @@ vim.pack.add {
   'https://github.com/mason-org/mason.nvim',
   'https://github.com/lewis6991/gitsigns.nvim',
   'https://github.com/vague-theme/vague.nvim',
+  'https://github.com/hedyhli/outline.nvim',
 }
+
+require('outline').setup()
 
 require('mason').setup()
 vim.lsp.enable {
@@ -72,6 +75,8 @@ vim.keymap.set('n', '[c', function() require("gitsigns").nav_hunk('prev') end)
 vim.keymap.set('n', ']c', function() require("gitsigns").nav_hunk('next') end)
 
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
+
+vim.keymap.set('n', '<leader>o', '<cmd>Outline<CR>')
 
 vim.api.nvim_create_autocmd('FileType', {
   callback = function() pcall(vim.treesitter.start) end,
