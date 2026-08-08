@@ -70,7 +70,7 @@ vim.keymap.set('n', '<leader>.', ':browse oldfiles<CR>')
 
 vim.keymap.set('n', '<leader>s', vim.lsp.buf.document_symbol)
 vim.keymap.set('n', '<leader>S', vim.lsp.buf.workspace_symbol)
-vim.keymap.set('n', '<leader>d', vim.diagnostic.setqflist)
+vim.keymap.set('n', '<leader>d', vim.diagnostic.setloclist)
 
 vim.keymap.set('n', '<leader>v', '<cmd>edit $MYVIMRC<CR>')
 
@@ -81,8 +81,6 @@ vim.keymap.set('n', '<leader>t', '<cmd>tab terminal<CR>a')
 vim.keymap.set('n', '<leader>h', function() require("gitsigns").setqflist("all") end)
 vim.keymap.set('n', '[c', function() require("gitsigns").nav_hunk('prev') end)
 vim.keymap.set('n', ']c', function() require("gitsigns").nav_hunk('next') end)
-
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
 
 vim.keymap.set('n', '<leader>o', '<cmd>Outline<CR>')
 
