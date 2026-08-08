@@ -25,9 +25,11 @@ vim.pack.add {
   'https://github.com/lewis6991/gitsigns.nvim',
   'https://github.com/vague-theme/vague.nvim',
   'https://github.com/hedyhli/outline.nvim',
+  'https://github.com/yorickpeterse/nvim-pqf',
 }
 
 require('outline').setup()
+require('pqf').setup()
 
 require('mason').setup()
 vim.lsp.enable {
