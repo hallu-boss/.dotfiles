@@ -57,6 +57,8 @@ vim.cmd.colorscheme('vague')
 
 vim.keymap.set({ 'n', 'x' }, '<leader>y', '"+y')
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
+vim.keymap.set('t', '<C-[>', '<C-\\><C-n>')
+vim.keymap.set('t', '<Esc>', '<Esc>')
 
 vim.keymap.set('n', '<leader>e', '<cmd>Ex<CR>')
 
