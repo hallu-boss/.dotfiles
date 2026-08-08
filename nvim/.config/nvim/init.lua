@@ -64,6 +64,10 @@ vim.keymap.set('n', '<leader>/', ':copen | silent grep! ')
 vim.keymap.set('n', '<leader>w', ':copen | silent grep! <C-r><C-w><CR>')
 vim.keymap.set('n', '<leader>.', ':browse oldfiles<CR>')
 
+vim.keymap.set('n', '<leader>s', vim.lsp.buf.document_symbol)
+vim.keymap.set('n', '<leader>S', vim.lsp.buf.workspace_symbol)
+vim.keymap.set('n', '<leader>d', vim.diagnostic.setqflist)
+
 vim.keymap.set('n', '<leader>v', '<cmd>edit $MYVIMRC<CR>')
 
 vim.keymap.set('n', '<leader>g', '<cmd>tab terminal lazygit<CR>a')
