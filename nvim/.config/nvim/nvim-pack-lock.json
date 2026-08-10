@@ -12,21 +12,9 @@
       "rev": "7ab79bb1b57160a537f427ac8a6026102f12b701",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
-    "nvim-pqf": {
-      "rev": "0f11180718b861986ac06a2fef16c404a58b3645",
-      "src": "https://github.com/yorickpeterse/nvim-pqf"
-    },
     "nvim-treesitter": {
       "rev": "61df84986b4b4ec469ee745a182e433d49f8c27e",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter"
-    },
-    "outline.nvim": {
-      "rev": "2a132953b944561d45b52e4541ebfff71934a742",
-      "src": "https://github.com/hedyhli/outline.nvim"
-    },
-    "vague.nvim": {
-      "rev": "f9060fdaf7b20f68575d6f8214da6f1cf0c72825",
-      "src": "https://github.com/vague-theme/vague.nvim"
     }
   }
 }

@@ -2,6 +2,7 @@ require('vim._core.ui2').enable()
 
 vim.cmd.colorscheme('habamax')
 vim.cmd.colorscheme('default')
+
 vim.g.mapleader = ' '
 vim.o.number = true
 vim.o.relativenumber = true
