@@ -23,13 +23,7 @@ vim.pack.add {
   'https://github.com/neovim/nvim-lspconfig',
   'https://github.com/mason-org/mason.nvim',
   'https://github.com/lewis6991/gitsigns.nvim',
-  'https://github.com/vague-theme/vague.nvim',
-  'https://github.com/hedyhli/outline.nvim',
-  'https://github.com/yorickpeterse/nvim-pqf',
 }
-
-require('outline').setup()
-require('pqf').setup()
 
 require('mason').setup()
 vim.lsp.enable {
@@ -52,8 +46,6 @@ local config = {
 }
 
 vim.lsp.config('lua_ls', config)
-
-vim.cmd.colorscheme('vague')
 
 vim.keymap.set({ 'n', 'x' }, '<leader>y', '"+y')
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
