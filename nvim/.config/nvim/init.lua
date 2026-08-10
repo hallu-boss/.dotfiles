@@ -1,5 +1,7 @@
 require('vim._core.ui2').enable()
 
+vim.cmd.colorscheme('habamax')
+vim.cmd.colorscheme('default')
 vim.g.mapleader = ' '
 vim.o.number = true
 vim.o.relativenumber = true
@@ -59,10 +61,9 @@ vim.keymap.set('n', '<leader>b', ':buffer ')
 vim.keymap.set('n', '<leader>/', ':copen | silent grep! ')
 vim.keymap.set('n', '<leader>w', ':copen | silent grep! <C-r><C-w><CR>')
 vim.keymap.set('n', '<leader>.', ':browse oldfiles<CR>')
-
-vim.keymap.set('n', '<leader>s', vim.lsp.buf.document_symbol)
-vim.keymap.set('n', '<leader>S', vim.lsp.buf.workspace_symbol)
 vim.keymap.set('n', '<leader>d', vim.diagnostic.setloclist)
+
+vim.keymap.set('n', 'gW', vim.lsp.buf.workspace_symbol)
 
 vim.keymap.set('n', '<leader>v', '<cmd>edit $MYVIMRC<CR>')
 
