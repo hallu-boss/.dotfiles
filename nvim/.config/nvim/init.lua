@@ -11,25 +11,17 @@ vim.o.ignorecase = true
 vim.o.smartcase = true
 vim.o.confirm = true
 vim.o.undofile = true
-vim.o.wildmode = 'noselect'
-vim.o.winborder = 'rounded'
 vim.o.list = true
-vim.o.cursorline = true
-vim.opt.wildoptions:append { 'fuzzy' }
-vim.o.statusline = "%<%f %h%w%m%r %{get(b:,'gitsigns_head','')} %{% v:lua.require('vim._core.util').term_exitcode() %}%=%{% luaeval('(package.loaded[''vim.ui''] and vim.api.nvim_get_current_win() == tonumber(vim.g.actual_curwin or -1) and vim.ui.progress_status()) or '''' ')%}%{% &showcmdloc == 'statusline' ? '%-10.S ' : '' %}%{% exists('b:keymap_name') ? '<'..b:keymap_name..'> ' : '' %}%{% &busy > 0 ? '◐ ' : '' %}%{% luaeval('(package.loaded[''vim.diagnostic''] and next(vim.diagnostic.count()) and vim.diagnostic.status() .. '' '') or '''' ') %}%{% &ruler ? ( &rulerformat == '' ? '%-14.(%l,%c%V%) %P' : &rulerformat ) : '' %}"
+
+vim.cmd.colorscheme('habamax')
+vim.cmd.colorscheme('default')
 
 vim.pack.add {
   'https://github.com/nvim-treesitter/nvim-treesitter',
   'https://github.com/neovim/nvim-lspconfig',
   'https://github.com/mason-org/mason.nvim',
-  'https://github.com/lewis6991/gitsigns.nvim',
-  'https://github.com/vague-theme/vague.nvim',
-  'https://github.com/hedyhli/outline.nvim',
-  'https://github.com/yorickpeterse/nvim-pqf',
+  'https://github.com/nvim-mini/mini.nvim',
 }
-
-require('outline').setup()
-require('pqf').setup()
 
 require('mason').setup()
 vim.lsp.enable {
@@ -53,49 +45,43 @@ local config = {
 
 vim.lsp.config('lua_ls', config)
 
-vim.cmd.colorscheme('vague')
+require('mini.icons').setup()
+require('mini.pick').setup()
+require('mini.files').setup()
+require('mini.diff').setup()
+require('mini.git').setup()
+require('mini.completion').setup()
+require('mini.cmdline').setup()
+require('mini.extra').setup()
 
 vim.keymap.set({ 'n', 'x' }, '<leader>y', '"+y')
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 vim.keymap.set('t', '<C-[>', '<C-\\><C-n>')
 vim.keymap.set('t', '<Esc>', '<Esc>')
 
-vim.keymap.set('n', '<leader>e', '<cmd>Ex<CR>')
-
-vim.keymap.set('n', '<leader>f', ':find ')
-vim.keymap.set('n', '<leader>b', ':buffer ')
-vim.keymap.set('n', '<leader>/', ':copen | silent grep! ')
-vim.keymap.set('n', '<leader>w', ':copen | silent grep! <C-r><C-w><CR>')
-vim.keymap.set('n', '<leader>.', ':browse oldfiles<CR>')
-
-vim.keymap.set('n', '<leader>s', vim.lsp.buf.document_symbol)
-vim.keymap.set('n', '<leader>S', vim.lsp.buf.workspace_symbol)
-vim.keymap.set('n', '<leader>d', vim.diagnostic.setloclist)
-
 vim.keymap.set('n', '<leader>v', '<cmd>edit $MYVIMRC<CR>')
-
-vim.keymap.set('n', '<leader>g', '<cmd>tab terminal lazygit<CR>a')
 
 vim.keymap.set('n', '<leader>t', '<cmd>tab terminal<CR>a')
 
-vim.keymap.set('n', '<leader>h', function() require("gitsigns").setqflist("all") end)
-vim.keymap.set('n', '[c', function() require("gitsigns").nav_hunk('prev') end)
-vim.keymap.set('n', ']c', function() require("gitsigns").nav_hunk('next') end)
+vim.keymap.set('n', '<leader>e', '<cmd>lua MiniFiles.open()<CR>')
+vim.keymap.set('n', '<leader>E', '<cmd>lua MiniFiles.open(vim.api.nvim_buf_get_name(0))<CR>')
 
-vim.keymap.set('n', '<leader>o', '<cmd>Outline<CR>')
+vim.keymap.set('n', '<leader>f', '<cmd>Pick files<CR>')
+vim.keymap.set('n', '<leader>b', '<cmd>Pick buffers<CR>')
+vim.keymap.set('n', '<leader>?', '<cmd>Pick help<CR>')
+vim.keymap.set('n', '<leader>k', '<cmd>Pick keymaps<CR>')
+vim.keymap.set('n', '<leader>/', '<cmd>Pick grep_live<CR>')
+vim.keymap.set('n', '<leader>\'', '<cmd>Pick resume<CR>')
+vim.keymap.set('n', '<leader>h', '<cmd>Pick git_hunks<CR>')
+
+vim.keymap.set('n', 'grr', '<cmd>Pick lsp scope="references"<CR>')
+vim.keymap.set('n', 'gri', '<cmd>Pick lsp scope="implementation"<CR>')
+vim.keymap.set('n', 'grt', '<cmd>Pick lsp scope="type_definition"<CR>')
+vim.keymap.set('n', 'gO', '<cmd>Pick lsp scope="document_symbol"<CR>')
+vim.keymap.set('n', 'gW', '<cmd>Pick lsp scope="workspace_symbol"<CR>')
 
 vim.api.nvim_create_autocmd('FileType', {
   callback = function() pcall(vim.treesitter.start) end,
-})
-
-vim.api.nvim_create_autocmd('CmdlineChanged', {
-  pattern = ':',
-  callback = function() vim.fn.wildtrigger() end,
-})
-
-vim.api.nvim_create_autocmd('TermClose', {
-  pattern = 'term://*lazygit',
-  callback = function() vim.api.nvim_input('<CR>') end,
 })
 
 vim.api.nvim_create_autocmd("TextYankPost", {
