@@ -70,7 +70,7 @@ vim.keymap.set('n', '<leader>v', '<cmd>edit $MYVIMRC<CR>')
 
 vim.keymap.set('n', '<leader>g', '<cmd>tab terminal lazygit<CR>a')
 
-vim.keymap.set('n', '<leader>t', '<cmd>tab terminal<CR>a')
+vim.keymap.set('n', '<C-/>', '<cmd>belowright terminal<CR>a')
 
 vim.keymap.set('n', '<leader>h', function() require("gitsigns").setqflist("all") end)
 vim.keymap.set('n', '[c', function() require("gitsigns").nav_hunk('prev') end)
