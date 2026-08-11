@@ -51,7 +51,6 @@ local config = {
 vim.lsp.config('lua_ls', config)
 
 vim.keymap.set({ 'n', 'x' }, '<leader>y', '"+y')
-vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 vim.keymap.set('t', '<C-[>', '<C-\\><C-n>')
 vim.keymap.set('t', '<Esc>', '<Esc>')
 
@@ -68,9 +67,7 @@ vim.keymap.set('n', 'gW', vim.lsp.buf.workspace_symbol)
 
 vim.keymap.set('n', '<leader>v', '<cmd>edit $MYVIMRC<CR>')
 
-vim.keymap.set('n', '<leader>g', '<cmd>tab terminal lazygit<CR>a')
-
-vim.keymap.set('n', '<C-/>', '<cmd>belowright terminal<CR>a')
+vim.keymap.set('n', '<C-/>', '<cmd>belowright terminal<CR><C-w>Ja')
 
 require('gitsigns').setup{
   on_attach = function(bufnr)
